@@ -1,0 +1,24 @@
+version: '3.1'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: skipper
+      MARIADB_USER: skipper
+      MARIADB_PASSWORD: skipper
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8090:8080
+
+  skipper:
+    image: rgamba/skipper-demo
+    depends_on:
+      - db
+    ports:
+      - 8080:8080
